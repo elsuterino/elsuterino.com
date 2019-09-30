@@ -1,0 +1,51 @@
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+// Variables
+@import "bulma";
+@import 'wave';
+@import 'animations';
+@import 'helpers';
+
+@media screen and (max-width: 768px) {
+    .level-item.contacts {
+        justify-content: left !important;
+    }
+}
+
+.media.portfolio {
+    @media screen and (max-width: 768px) {
+        flex-direction:column;
+    }
+    .media-left{
+        @media screen and (max-width: 768px) {
+            padding-bottom:1rem;
+            margin-right:0;
+        }
+    }
+    .media-left > .image {
+        width:200px;
+        @media screen and (max-width: 768px) {
+            width:100%;
+        }
+    }
+}
+
+
+//.hero {
+//    background: url(/images/hero.jpg);
+//}
+.piggie{
+    position:absolute;
+    bottom:0;
+    z-index:1;
+    opacity:0.5;
+    right:25%;
+    height:300px;
+    @media screen and (max-width: 768px) {
+        right:0;
+        left:0;
+        margin-left: auto;
+        margin-right:auto;
+        opacity: 0.3;
+    }
+}
