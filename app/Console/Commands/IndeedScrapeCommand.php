@@ -51,7 +51,7 @@ class IndeedScrapeCommand extends Command
         return $jobs;
     }
 
-    private function doJob(Crawler $node)
+    public function doJob(Crawler $node)
     {
         Job::firstOrCreate(
             [

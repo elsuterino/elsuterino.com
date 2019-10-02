@@ -37,7 +37,7 @@ class WeWorkRemotelyScrapeCommand extends Command
             });
     }
 
-    protected function doJob(Crawler $node)
+    public function doJob(Crawler $node)
     {
         Job::firstOrCreate(
             [
@@ -54,7 +54,7 @@ class WeWorkRemotelyScrapeCommand extends Command
         );
     }
 
-    private function url(Crawler $node)
+    public function url(Crawler $node)
     {
         $urls = $node->filter('a')->each(function (Crawler $node) {
             return $node->link()->getUri();
@@ -69,7 +69,7 @@ class WeWorkRemotelyScrapeCommand extends Command
         return null;
     }
 
-    private function logo(Crawler $node)
+    public function logo(Crawler $node)
     {
         if (!count($node->filter('.flag-logo'))) {
             return null;

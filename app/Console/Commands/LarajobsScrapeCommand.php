@@ -37,7 +37,7 @@ class LarajobsScrapeCommand extends Command
             });
     }
 
-    protected function doJob(Crawler $node){
+    public function doJob(Crawler $node){
         Job::firstOrCreate(
             [
                 'provider' => $this->provider,
@@ -53,7 +53,7 @@ class LarajobsScrapeCommand extends Command
         );
     }
 
-    protected function getUrl(Crawler $node)
+    public function getUrl(Crawler $node)
     {
         $dataUrl = (string) $node->filter('a')->first()->attr('data-url');
         $href = $node->filter('a')->first()->link()->getUri();

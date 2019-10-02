@@ -38,7 +38,7 @@ class RemotiveScrapeCommand extends Command
             });
     }
 
-    protected function doJob(Crawler $node)
+    public function doJob(Crawler $node)
     {
         Job::firstOrCreate(
             [
@@ -56,7 +56,7 @@ class RemotiveScrapeCommand extends Command
         );
     }
 
-    protected function getId(Crawler $node)
+    public function getId(Crawler $node)
     {
         $url = $node->filter('.position a')->first()->link()->getUri();
 
@@ -65,7 +65,7 @@ class RemotiveScrapeCommand extends Command
         return $url === 'none' ? null : $url;
     }
 
-    protected function getUrl(Crawler $node)
+    public function getUrl(Crawler $node)
     {
         $dataUrl = (string) $node->filter('a')->first()->attr('data-url');
         $href = $node->filter('a')->first()->link()->getUri();
@@ -81,7 +81,7 @@ class RemotiveScrapeCommand extends Command
         return null;
     }
 
-    protected function getLogo(Crawler $node)
+    public function getLogo(Crawler $node)
     {
         $img = $node->filter('.job-logo');
 
