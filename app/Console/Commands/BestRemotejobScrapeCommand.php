@@ -23,15 +23,13 @@ class BestRemotejobScrapeCommand extends Command
     {
         $this->config = $this->getConfig($this->provider);
 
-        $this->getJobs();
+        foreach($this->config['url'] as $url){
+            $this->getJobs($url);
+        }
     }
 
     public function getJobs($url = null)
     {
-        if(!$url){
-            $url = $this->config['url'];
-        }
-
         $url .= '&created_at__gte=' . Carbon::now()->subMonth()->timestamp * 1000;
 
         $client = new Client();
