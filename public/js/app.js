@@ -15405,16 +15405,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
     title: 'El Suterino',
@@ -34904,27 +34894,6 @@ var render = function() {
                   _c("span", [_vm._v("JS")])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("h4", { staticClass: "heading" }, [_vm._v("Frameworks Used")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "level" }, [
-              _c("div", { staticClass: "level-left" }, [
-                _c("div", { staticClass: "level-item justify-start" }, [
-                  _c(
-                    "span",
-                    { staticClass: "icon" },
-                    [
-                      _c("font-awesome-icon", {
-                        attrs: { icon: ["fab", "bootstrap"] }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Bootstrap")])
-                ])
-              ])
             ])
           ])
         ]),
@@ -34953,7 +34922,7 @@ var staticRenderFns = [
       [
         _c("strong", [_vm._v("Inetvi")]),
         _vm._v(
-          " - a small team in venezuela, continued working with South and North american clients."
+          " - a small team in venezuela, continuing working with South and North american clients, providing business management systems.\n                        "
         )
       ]
     )
@@ -34976,7 +34945,7 @@ var staticRenderFns = [
       [
         _c("strong", [_vm._v("Freelancing")]),
         _vm._v(
-          " - worked as a remote freelancer with clients from Venezuela and USA"
+          " - working as a remote freelancer with clients from Venezuela and USA"
         )
       ]
     )

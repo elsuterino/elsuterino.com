@@ -69,5 +69,13 @@ return [
             // query
             'url' => 'https://weworkremotely.com/categories/remote-programming-jobs'
         ],
+        'bestremotejob' => [
+            'color' => null,
+            'name' => 'BestRemoteJob',
+            'displayUrl' => 'bestremotejob.com',
+            'iconUrl' => null,
+            // query
+            'url' => 'https://api.doask.net/search/query/jobs/?is_active=true&search=remote&search=php&limit=1000'
+        ]
     ],
 ];

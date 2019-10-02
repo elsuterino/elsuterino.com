@@ -12,7 +12,9 @@
                     </div>
                     <div class="timeline-content">
                         <p class="heading">2014 - 2017</p>
-                        <p class="is-size-4" style="margin-bottom:1.5rem;"><strong>Inetvi</strong> - a small team in venezuela, continued working with South and North american clients.</p>
+                        <p class="is-size-4" style="margin-bottom:1.5rem;">
+                            <strong>Inetvi</strong> - a small team in venezuela, continuing working with South and North american clients, providing business management systems.
+                        </p>
 
                         <p class="heading">Languages Used</p>
                         <div class="level">
@@ -96,7 +98,7 @@
                     </div>
                     <div class="timeline-content">
                         <p class="heading">2008 - 2014</p>
-                        <p class="is-size-4" style="margin-bottom:1.5rem;"><strong>Freelancing</strong> - worked as a remote freelancer with clients from Venezuela and USA</p>
+                        <p class="is-size-4" style="margin-bottom:1.5rem;"><strong>Freelancing</strong> - working as a remote freelancer with clients from Venezuela and USA</p>
 
                         <p class="heading">Languages Used</p>
                         <div class="level">
@@ -130,18 +132,6 @@
                                         <font-awesome-icon :icon="['fab', 'js']"></font-awesome-icon>
                                     </span>
                                     <span>JS</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h4 class="heading">Frameworks Used</h4>
-                        <div class="level">
-                            <div class="level-left">
-                                <div class="level-item justify-start">
-                                <span class="icon">
-                                    <font-awesome-icon :icon="['fab', 'bootstrap']"></font-awesome-icon>
-                                </span>
-                                    <span>Bootstrap</span>
                                 </div>
                             </div>
                         </div>
