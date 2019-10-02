@@ -5,8 +5,10 @@ namespace App\Console\Commands;
 
 use App\Job;
 use App\Traits\ScrapeTrait;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Symfony\Component\DomCrawler\Crawler;
 
 class BestRemotejobScrapeCommand extends Command
 {
@@ -41,6 +43,10 @@ class BestRemotejobScrapeCommand extends Command
             }
 
             if($job->is_active === false){
+                continue;
+            }
+
+            if(Carbon::parse($job->created_at)->lt(Carbon::now()->subMonth())){
                 continue;
             }
 
