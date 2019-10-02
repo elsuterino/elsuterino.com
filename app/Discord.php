@@ -47,8 +47,6 @@ class Discord
         try {
             $this->client->request('POST', config('job.discordWebhook'), $this->payload);
         } catch (GuzzleException $e) {
-            echo $e->getMessage();
-            echo json_encode($this->payload);
             logger('discord call failed ' . $e->getMessage());
         }
     }

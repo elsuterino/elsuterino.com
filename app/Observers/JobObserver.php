@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Discord;
 use App\Job;
+use Illuminate\Support\Str;
 
 class JobObserver
 {
@@ -67,6 +68,10 @@ class JobObserver
                 'value' => implode(', ', $job->tags),
                 'inline' => true,
             ];
+        }
+
+        if(in_array('laravel', array_map('strtolower', $job->tags)) || Str::contains(strtolower($job->title), 'laravel') || Str::contains(strtolower($job->description), 'laravel')){
+            $payload['footer']['text'] = 'Laravel !!!';
         }
 
         $disc = new Discord();
