@@ -21,18 +21,11 @@
             </div>
         </section>
         <section class="section hero is-medium is-bold is-primary is-relative">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                 viewBox="0 0 100 7" width="100" height="7" preserveAspectRatio="none"
-                 class="wave up" style="z-index:20;">
-                <path d="M0 4Q23-2 50 4 77 10 100 4L100 8 0 8 0 4Z"
-                      fill="rgb(255,255,255)"></path>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                 viewBox="0 0 100 7" width="100" height="7" preserveAspectRatio="none"
-                 class="wave" style="z-index:20;">
-                <path d="M0 4Q23-2 50 4 77 10 100 4L100 8 0 8 0 4Z"
-                      fill="rgb(255,255,255)"></path>
-            </svg>
+
+            <v-wave :secondary="false" class="wave up" style="z-index:20;"></v-wave>
+
+            <v-wave :secondary="false" class="wave" style="z-index:20;"></v-wave>
+
             <div class="container">
                 <div class="columns">
                     <div class="column is-8">

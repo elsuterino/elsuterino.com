@@ -16,6 +16,9 @@
                             <router-link class="navbar-item" :to="{name: 'about'}" @click.native="navBurger = false" exact>
                                 About
                             </router-link>
+                            <router-link class="navbar-item" :to="{name: 'experience'}" @click.native="navBurger = false">
+                                Experience
+                            </router-link>
                             <router-link class="navbar-item" :to="{name: 'skills'}" @click.native="navBurger = false">
                                 Skills
                             </router-link>
@@ -57,16 +60,11 @@
             </div>
         </div>
 
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             viewBox="0 0 100 7" width="100" height="7" preserveAspectRatio="none"
-             class="wave" style="z-index:20;">
-            <path d="M0 4Q23-2 50 4 77 10 100 4L100 8 0 8 0 4Z"
-                  fill="rgb(255,255,255)"></path>
-            <path d="M0 4Q23 10 50 4 77 -2 100 4L100 8 0 8 0 4Z"
-                  fill="rgba(255,255,255,0.5)"></path>
-        </svg>
+        <v-wave class="wave" style="z-index:20;"></v-wave>
 
-        <img alt="piggie" class="piggie" src="/images/piggie.svg">
+        <v-piggie class="piggie"></v-piggie>
+<!--        <img alt="piggie" class="piggie" src="/images/piggie.svg">-->
+
         <div class="hero-foot"></div>
     </section>
 </template>

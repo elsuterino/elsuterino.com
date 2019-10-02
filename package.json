@@ -22,6 +22,7 @@
         "sass": "^1.20.1",
         "sass-loader": "7.*",
         "vue": "^2.5.17",
+        "vue-svg-loader": "^0.12.0",
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
@@ -30,7 +31,9 @@
         "@fortawesome/free-solid-svg-icons": "^5.11.2",
         "@fortawesome/vue-fontawesome": "^0.1.7",
         "html-webpack-plugin": "^3.2.0",
+        "laravel-mix-svg-vue": "^0.2.3",
         "prerender-spa-plugin": "^3.4.0",
+        "svg-vue": "^0.1.1",
         "vue-meta": "^2.2.2",
         "vue-router": "^3.1.3"
     }

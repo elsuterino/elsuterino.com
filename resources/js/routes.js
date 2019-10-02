@@ -4,6 +4,7 @@ import Portfolio from './views/Portfolio';
 import About from './views/About';
 import Skills from './views/Skills';
 import Contact from './views/Contact';
+import Experience from "./views/Experience";
 
 export default new VueRouter({
     mode: 'history',
@@ -25,6 +26,11 @@ export default new VueRouter({
             path: '/',
             component: About,
             name: 'about'
+        },
+        {
+            path: '/experience',
+            component: Experience,
+            name: 'experience'
         },
         {
             path: '/skills',

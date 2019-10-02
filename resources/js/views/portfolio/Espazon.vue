@@ -12,8 +12,7 @@
                 <h4>Description</h4>
                 <p>
                     Website built at 2013 using amazon api / affiliate for spanish speaking people, functioning as a proxy.
-                    It was #1 in google rankings for couple years.
-                    Untill amazon decide to shut it down with copyright claim.
+                    It was #1 in google rankings for a while, untill amazon decide to shut it down with copyright claim.
                 </p>
 
                 <h4>How it works</h4>
