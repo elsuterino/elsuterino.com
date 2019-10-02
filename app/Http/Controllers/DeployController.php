@@ -25,6 +25,7 @@ class DeployController extends Controller
             $process->run(function ($type, $buffer) {
                 echo $buffer;
             });
+
         }
     }
 }
