@@ -72,7 +72,7 @@ return [
         'bestremotejob' => [
             'color' => null,
             'name' => 'BestRemoteJob',
-            'displayUrl' => 'bestremotejob.com',
+            'displayUrl' => 'https://bestremotejob.com',
             'iconUrl' => null,
             // query
             'url' => 'https://api.doask.net/search/query/jobs/?is_active=true&search=remote&search=php&limit=1000'

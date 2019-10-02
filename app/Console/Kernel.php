@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('scrape:larajobs')->hourly();
         $schedule->command('scrape:remotive')->hourly();
         $schedule->command('scrape:weworkremotely')->hourly();
+        $schedule->command('scrape:bestremotejob')->hourly();
     }
 
     /**

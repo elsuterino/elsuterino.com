@@ -72,7 +72,6 @@ class JobObserver
         $disc = new Discord();
 
         $disc->embed($payload)->send();
-
         // discord spam limit
         sleep(2);
     }
