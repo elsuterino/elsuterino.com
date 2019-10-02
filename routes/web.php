@@ -16,8 +16,5 @@ Route::get('/404', function () {
 })->name('home');
 
 Route::get('/{any?}', function () {
-    $data = [
-        'isLogedIn' => auth()->check(),
-    ];
     return view('welcome');
 })->name('home');

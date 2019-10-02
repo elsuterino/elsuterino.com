@@ -16,7 +16,8 @@
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.0",
-        "spatie/regex": "^1.4"
+        "spatie/regex": "^1.4",
+        "symfony/process": "^4.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

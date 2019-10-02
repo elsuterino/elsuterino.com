@@ -1,7 +1,7 @@
 <template>
     <section class="section">
         <div class="container">
-            <h1 class="title is-1">Experience / Skills</h1>
+            <h2 class="title is-2">Experience / Skills</h2>
             <div class="columns">
                 <div v-for="(items, name) in skills" class="column">
                     <h3 class="heading is-size-4">{{ name }}</h3>

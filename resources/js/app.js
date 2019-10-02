@@ -7,10 +7,18 @@ import VueMeta from 'vue-meta';
 import router from './routes';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFilePdf, faDatabase, faStar, faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
-import { faPhp, faJs, faHtml5, faCss3Alt, faUbuntu, faVuejs, faSymfony, faWordpress, faLaravel, faDocker, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import {
+    faPhp, faJs, faHtml5, faCss3Alt, faUbuntu, faVuejs, faSymfony, faWordpress, faLaravel, faDocker, faGithub,
+    faLinkedin, faSkype
+} from '@fortawesome/free-brands-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faFilePdf, faDatabase, faPhp, faJs, faHtml5, faCss3Alt, faUbuntu, faVuejs, faSymfony, faWordpress, faLaravel, faDocker, faStar, faGithub, faLinkedin, faEnvelope, faPhone, faGlobe);
+library.add(
+    faFilePdf, faDatabase, faPhp, faJs, faHtml5, faCss3Alt, faUbuntu, faVuejs, faSymfony, faWordpress,
+    faLaravel, faDocker, faStar, faGithub, faLinkedin, faEnvelope, faPhone, faGlobe, faSkype
+);
+
 Vue.use(VueRouter);
 Vue.use(VueMeta, {
     // optional pluginOptions

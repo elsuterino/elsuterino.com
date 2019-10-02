@@ -2,7 +2,7 @@
     <div>
         <section class="section">
             <div class="container">
-                <h1 class="title is-1">Contact</h1>
+                <h2 class="title is-2">Contact</h2>
                 <div class="columns">
                     <div class="column">
                         <div class="level is-size-4">
@@ -20,6 +20,14 @@
                                         <font-awesome-icon :icon="['fab', 'linkedin']"/>
                                     </span>
                                     <span>LinkedIn</span>
+                                </a>
+                            </div>
+                            <div class="level-item contacts">
+                                <a href="skype:sutrius11" rel="noopener" class="is-flex items-center">
+                                    <span class="icon is-medium">
+                                        <font-awesome-icon :icon="['fab', 'skype']"/>
+                                    </span>
+                                    <span>Skype</span>
                                 </a>
                             </div>
                             <div class="level-item contacts">

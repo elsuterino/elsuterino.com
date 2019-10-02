@@ -1,7 +1,7 @@
 <template>
     <section class="section">
         <div class="container">
-            <h1 class="title is-1">Portfolio</h1>
+            <h2 class="title is-2">Portfolio</h2>
 
             <currency-exchange-today></currency-exchange-today>
 
@@ -9,6 +9,9 @@
 
             <dolardeverdad></dolardeverdad>
 
+            <hr>
+
+            <espazon></espazon>
         </div>
     </section>
 </template>
@@ -16,6 +19,7 @@
 <script>
     import CurrencyExchangeToday from "./portfolio/CurrencyExchangeToday";
     import Dolardeverdad from "./portfolio/Dolardeverdad";
+    import Espazon from "./portfolio/Espazon";
 
     export default {
         metaInfo: {
@@ -24,7 +28,8 @@
         },
         components:{
             CurrencyExchangeToday,
-            Dolardeverdad
+            Dolardeverdad,
+            Espazon
         }
     }
 </script>
