@@ -26,9 +26,13 @@ class BestRemotejobScrapeCommand extends Command
         $this->getJobs();
     }
 
-    public function getJobs()
+    public function getJobs($url = null)
     {
-        $url = $this->config['url'];
+        if(!$url){
+            $url = $this->config['url'];
+        }
+
+        $url .= '&created_at__gte=' . Carbon::now()->subMonth()->timestamp * 1000;
 
         $client = new Client();
 
@@ -37,20 +41,15 @@ class BestRemotejobScrapeCommand extends Command
         $data = json_decode($data->getBody());
 
         foreach($data->results as $job){
-
-            if($job->job_type !== 'remote'){
-                continue;
-            }
-
             if($job->is_active === false){
                 continue;
             }
 
-            if(Carbon::parse($job->created_at)->lt(Carbon::now()->subMonth())){
-                continue;
-            }
-
             $this->doJob($job);
+        }
+
+        if($data->next){
+            $this->getJobs($data->next);
         }
     }
 
