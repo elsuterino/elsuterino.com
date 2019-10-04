@@ -3,57 +3,39 @@
 
 namespace App\Console\Commands;
 
-use App\Job;
-use App\Traits\ScrapeTrait;
-use Goutte\Client;
-use Illuminate\Console\Command;
+use App\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;
 
-class GlassDoorScrapeCommand extends Command
+class GlassDoorScrapeCommand extends AbstractJobScrape
 {
-    use ScrapeTrait;
+    use CrawlerTrait;
 
     protected $signature = 'scrape:glassdoor';
     protected $description = 'Scrapes glassdoor.com';
-    protected $provider = 'glassdoor';
-    protected $config;
 
-    public function handle()
+    public $provider = 'glassdoor';
+
+    public function getJobs($url)
     {
-        $this->config = $this->getConfig($this->provider);
+        $url .= '?' . http_build_query($this->config['params']);
 
-        $this->getJobs();
-    }
+        $crawler = $this->crawlerGet($url);
 
-    public function getJobs()
-    {
-        $url = $this->config['url'] . '?' . http_build_query($this->config['params']);
-
-        $client = new Client();
-
-        $data = $client->request('get', $url);
-
-        $data->filter("ul.jlGrid > li.jl")
+        return $crawler->filter("ul.jlGrid > li.jl")
             ->each(function (Crawler $node) {
-                $this->doJob($node);
+                return $this->formatJob($node);
             });
     }
 
-    public function doJob(Crawler $node)
+    public function formatJob(Crawler $node)
     {
-        Job::firstOrCreate(
-            [
-                'provider' => $this->provider,
-                'provider_id' => $node->attr('data-id')
-            ],
-            [
-                'title' => trim($node->filter('.jobContainer > a.jobTitle')->first()->text(null)),
-                'company' => trim($node->filter('.jobEmpolyerName')->first()->text(null)),
-                'location' => trim($node->filter('.subtle.loc')->first()->text(null)),
-                'url' => $this->firstNodeLink($node, 'a.jobTitle'),
-                'logo' => $this->firstNodeAttribute($node, '.logoWrap img', 'data-original'),
-//                'rating' => $node->filter('.compactStars')->first()->text(null),
-            ]
-        );
+        return [
+            'provider_id' => $node->attr('data-id'),
+            'title' => trim($node->filter('.jobContainer > a.jobTitle')->first()->text(null)),
+            'company' => trim($node->filter('.jobEmpolyerName')->first()->text(null)),
+            'location' => trim($node->filter('.subtle.loc')->first()->text(null)),
+            'url' => $this->firstNodeLink($node, 'a.jobTitle'),
+            'logo' => $this->firstNodeAttribute($node, '.logoWrap img', 'data-original'),
+        ];
     }
 }

@@ -3,73 +3,57 @@
 
 namespace App\Console\Commands;
 
-use App\Job;
-use App\Traits\ScrapeTrait;
+use App\Traits\GuzzleTrait;
 use Carbon\Carbon;
-use GuzzleHttp\Client;
-use Illuminate\Console\Command;
-use Symfony\Component\DomCrawler\Crawler;
 
-class BestRemotejobScrapeCommand extends Command
+class BestRemotejobScrapeCommand extends AbstractJobScrape
 {
-    use ScrapeTrait;
+    use GuzzleTrait;
 
     protected $signature = 'scrape:bestremotejob';
+
     protected $description = 'Scrapes bestremotejob.com';
-    protected $provider = 'bestremotejob';
-    protected $config;
+    // the key for config and database
+    public $provider = 'bestremotejob';
 
-    public function handle()
+    public function getJobs($url)
     {
-        $this->config = $this->getConfig($this->provider);
+        $jobs = [];
 
-        foreach($this->config['url'] as $url){
-            $this->getJobs($url);
-        }
-    }
-
-    public function getJobs($url = null)
-    {
+        // limit only to last month
         $url .= '&created_at__gte=' . Carbon::now()->subMonth()->timestamp * 1000;
 
-        $client = new Client();
+        $data = $this->guzzleGetJson($url);
 
-        $data = $client->request('get', $url);
-
-        $data = json_decode($data->getBody());
-
-        foreach($data->results as $job){
-            if($job->is_active === false){
+        foreach ($data->results as $job) {
+            if ($job->is_active === false) {
                 continue;
             }
 
-            if(!$job->id){
+            if (!$job->id) {
                 continue;
             }
 
-            $this->doJob($job);
+            $jobs[] = $this->formatJob($job);
         }
 
-        if($data->next){
-            $this->getJobs($data->next);
+        if ($data->next) {
+            array_merge($jobs, $this->getJobs($data->next));
         }
+
+        return $jobs;
     }
 
-    public function doJob($job)
+    public function formatJob($job)
     {
-        Job::firstOrCreate(
-            [
-                'provider' => $this->provider,
-                'provider_id' => $job->id
-            ],
-            [
-                'title' => $job->title,
-                'company' => $job->client,
-                'location' => $job->location,
-                'url' => $job->url,
-                'tags' => array_merge($job->tools, $job->languages),
-                'salary' => $job->flat_rate ?? $job->hourly_rate
-            ]
-        );
+        return [
+            'provider_id' => $job->id,
+            'title' => $job->title,
+            'company' => $job->client,
+            'location' => $job->location,
+            'url' => $job->url,
+            'tags' => array_merge($job->tools, $job->languages),
+            'salary' => $job->flat_rate ?? $job->hourly_rate,
+        ];
     }
 }

@@ -3,55 +3,48 @@
 namespace App\Console\Commands;
 
 use App\Job;
-use App\Traits\ScrapeTrait;
+use App\Traits\CrawlerTrait;
+use App\Traits\JobCommandTrait;
 use Goutte\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Symfony\Component\DomCrawler\Crawler;
 
-class WeWorkRemotelyScrapeCommand extends Command
+class WeWorkRemotelyScrapeCommand extends AbstractJobScrape
 {
-    use ScrapeTrait;
+    use CrawlerTrait;
 
     protected $signature = 'scrape:weworkremotely';
     protected $description = 'Scrapes WeWorkRemotely.com';
-    protected $provider = 'weworkremotely';
-    protected $config;
 
-    public function handle()
+    public $provider = 'weworkremotely';
+
+    public function getJobs($url)
     {
-        $this->config = $this->getConfig($this->provider);
+        $crawler = $this->crawlerGet($url);
 
-        $this->getJobs();
-    }
-
-    public function getJobs()
-    {
-        $client = new Client();
-
-        $data = $client->request('get', $this->config['url']);
-
-        $data->filter('.jobs li')
+        $jobs = $crawler->filter('.jobs li')
             ->each(function (Crawler $node) {
-                $this->doJob($node);
+                return $this->formatJob($node);
             });
+
+        // needs some filtering due to last li element being navigation
+        return Arr::where($jobs, function($item){
+            return $item['provider_id'] && $item['title'];
+        });
     }
 
-    public function doJob(Crawler $node)
+    public function formatJob(Crawler $node)
     {
-        Job::firstOrCreate(
-            [
-                'provider' => $this->provider,
-                'provider_id' => $this->url($node),
-            ],
-            [
-                'title' => $node->filter('.title')->first()->text(null),
-                'company' => $node->filter('.company')->first()->text(null),
-                'url' => $this->url($node),
-                'location' => $node->filter('.region.company')->first()->text(null),
-                'logo' => $this->logo($node),
-            ]
-        );
+        return [
+            'provider_id' => $this->url($node),
+            'title' => $node->filter('.title')->first()->text(null),
+            'company' => $node->filter('.company')->first()->text(null),
+            'url' => $this->url($node),
+            'location' => $node->filter('.region.company')->first()->text(null),
+            'logo' => $this->logo($node),
+        ];
     }
 
     public function url(Crawler $node)

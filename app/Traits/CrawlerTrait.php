@@ -4,24 +4,26 @@
 namespace App\Traits;
 
 
+
+use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-trait ScrapeTrait
+trait CrawlerTrait
 {
-    protected function getConfig(String $provider)
+    /**
+     * @param $url
+     * @return \Symfony\Component\DomCrawler\Crawler
+     */
+    public function crawlerGet(string $url)
     {
-        $config = config("job.providers.{$provider}", null);
+        $client = new Client();
 
-        if (!$config) {
-            logger('Indeed config not set, exiting.');
+        $data = $client->request('get', $url);
 
-            exit();
-        }
-
-        return $config;
+        return $data;
     }
 
-    protected function firstNodeLink(Crawler $node, String $selector)
+    public function firstNodeLink(Crawler $node, String $selector)
     {
         $node = $node->filter($selector);
 
@@ -32,7 +34,7 @@ trait ScrapeTrait
         return $node->first()->link()->getUri();
     }
 
-    protected function firstNodeAttribute(Crawler $node, String $selector, String $attribute, String $prefix = null)
+    public function firstNodeAttribute(Crawler $node, String $selector, String $attribute, String $prefix = null)
     {
         $node = $node->filter($selector);
 

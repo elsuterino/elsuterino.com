@@ -3,57 +3,40 @@
 
 namespace App\Console\Commands;
 
-use App\Job;
-use App\Traits\ScrapeTrait;
-use Goutte\Client;
-use Illuminate\Console\Command;
+use App\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;
 use Spatie\Regex\Regex;
 
-class RemotiveScrapeCommand extends Command
+class RemotiveScrapeCommand extends AbstractJobScrape
 {
-    use ScrapeTrait;
+    use CrawlerTrait;
 
     protected $signature = 'scrape:remotive';
     protected $description = 'Scrapes remotive.io';
-    protected $provider = 'remotive';
-    protected $config;
 
-    public function handle()
+    public $provider = 'remotive';
+
+    public function getJobs($url)
     {
-        $this->config = $this->getConfig($this->provider);
+        $crawler = $this->crawlerGet($url);
 
-        $this->getJobs();
-    }
-
-    public function getJobs()
-    {
-        $client = new Client();
-
-        $data = $client->request('get', $this->config['url']);
-
-        $data->filter('.job-list > li')
+        return $crawler->filter('.job-list > li')
             ->each(function (Crawler $node) {
-                $this->doJob($node);
+                return $this->formatJob($node);
             });
     }
 
-    public function doJob(Crawler $node)
+    public function formatJob(Crawler $node)
     {
-        Job::firstOrCreate(
-            [
-                'provider' => $this->provider,
-                'provider_id' => $this->getId($node),
-            ],
-            [
-                'title' => trim($node->filter('.position a')->first()->text(null)),
-                'company' => trim($node->filter('.company span')->first()->text(null)),
-                'location' => trim($node->filter('.company > .location')->first()->text(null)),
-                'url' => $node->filter('.position > a')->first()->link()->getUri(),
-                'logo' => $this->getLogo($node),
-                'tags' => $node->filter('.job-tags > .job-tag')->extract(['_text']),
-            ]
-        );
+        return [
+            'provider_id' => $this->getId($node),
+            'title' => trim($node->filter('.position a')->first()->text(null)),
+            'company' => trim($node->filter('.company span')->first()->text(null)),
+            'location' => trim($node->filter('.company > .location')->first()->text(null)),
+            'url' => $node->filter('.position > a')->first()->link()->getUri(),
+            'logo' => $this->getLogo($node),
+            'tags' => $node->filter('.job-tags > .job-tag')->extract(['_text']),
+        ];
     }
 
     public function getId(Crawler $node)

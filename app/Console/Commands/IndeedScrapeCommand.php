@@ -3,47 +3,38 @@
 
 namespace App\Console\Commands;
 
-use App\Job;
-use App\Traits\ScrapeTrait;
-use Goutte\Client;
-use Illuminate\Console\Command;
+use App\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;
 
-class IndeedScrapeCommand extends Command
+class IndeedScrapeCommand extends AbstractJobScrape
 {
-    use ScrapeTrait;
+    use CrawlerTrait;
 
     protected $signature = 'scrape:indeed';
     protected $description = 'Scrapes Indeed.com';
-    protected $provider = 'indeed';
-    protected $config;
 
-    public function handle()
-    {
-        $this->config = $this->getConfig($this->provider);
-
-        $this->getJobs($this->config['url']);
-    }
+    public $provider = 'indeed';
 
     public function getJobs($url)
     {
-        $client = new Client();
+        $crawler = $this->crawlerGet($url);
 
-        $data = $client->request('get', $url);
-
-        $jobs = $data->filter('#resultsCol .jobsearch-SerpJobCard')
+        $jobs = $crawler->filter('#resultsCol .jobsearch-SerpJobCard')
             ->each(function (Crawler $node) {
-                $this->doJob($node);
+                return $this->formatJob($node);
             });
 
         // pagination
-        if (count($data->filter('#resultsCol .pagination > a'))) {
+        if (count($crawler->filter('#resultsCol .pagination > a'))) {
 
-            $lastPagination = $data->filter('#resultsCol .pagination > a')->last();
+            $lastPagination = $crawler->filter('#resultsCol .pagination > a')->last();
 
             if ($text = trim($lastPagination->filter('.pn .np')->first()->text(null))) {
                 if (strtolower($text) === 'next »') {
-                    $this->getJobs($lastPagination->link()->getUri());
+                    $jobs = array_merge(
+                        $jobs,
+                        $this->getJobs($lastPagination->link()->getUri())
+                    );
                 }
             }
         }
@@ -51,21 +42,16 @@ class IndeedScrapeCommand extends Command
         return $jobs;
     }
 
-    public function doJob(Crawler $node)
+    public function formatJob(Crawler $node)
     {
-        Job::firstOrCreate(
-            [
-                'provider' => $this->provider,
-                'provider_id' => $node->attr('id'),
-            ],
-            [
-                'title' => trim($node->filter('.title > a')->first()->text(null)),
-                'company' => trim($node->filter('.sjcl .company')->first()->text(null)),
-                'location' => trim($node->filter('.sjcl .location')->first()->text(null)),
-                'description' => trim($node->filter('.summary')->first()->text(null)),
-                'url' => $this->firstNodeLink($node, '.title > a'),
-                'salary' => trim($node->filter('.salaryText')->first()->text(null)),
-            ]
-        );
+        return [
+            'provider_id' => $node->attr('id'),
+            'title' => trim($node->filter('.title > a')->first()->text(null)),
+            'company' => trim($node->filter('.sjcl .company')->first()->text(null)),
+            'location' => trim($node->filter('.sjcl .location')->first()->text(null)),
+            'description' => trim($node->filter('.summary')->first()->text(null)),
+            'url' => $this->firstNodeLink($node, '.title > a'),
+            'salary' => trim($node->filter('.salaryText')->first()->text(null)),
+        ];
     }
 }
