@@ -15,8 +15,6 @@ Route::get('/404', function () {
     abort(404);
 })->name('home');
 
-Route::post('/deploy', 'DeployController@handle');
-
 Route::get('/{any?}', function () {
     return view('welcome');
 })->name('home');
