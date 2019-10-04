@@ -43,6 +43,10 @@ class BestRemotejobScrapeCommand extends Command
                 continue;
             }
 
+            if(!$job->id){
+                continue;
+            }
+
             $this->doJob($job);
         }
 
