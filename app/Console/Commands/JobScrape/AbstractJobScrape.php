@@ -69,6 +69,5 @@ abstract class AbstractJobScrape extends Command implements JobScrapeInterface
                 ]
             );
         }
-
     }
 }

@@ -56,7 +56,7 @@ return [
 
         'slack' => [
             'driver' => 'slack',
-            'url' => 'https://discordapp.com/api/webhooks/629696079570665472/xlDhWVMxLRmLWM1AKAwm58F1_-VtcFGbmKqlHoeMl8P2TbMrGRzu95MJLCNettl3LwMs',
+            'url' => 'https://discordapp.com/api/webhooks/629696079570665472/xlDhWVMxLRmLWM1AKAwm58F1_-VtcFGbmKqlHoeMl8P2TbMrGRzu95MJLCNettl3LwMs/slack',
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
             'level' => 'debug',
