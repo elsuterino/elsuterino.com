@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\ScrapeCommandTests;
 
-use App\Console\Commands\LarajobsScrapeCommand;
+use App\Console\Commands\JobScrape\LarajobsScrapeCommand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 

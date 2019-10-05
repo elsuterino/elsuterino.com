@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\ScrapeCommandTests;
 
-use App\Console\Commands\RemotiveScrapeCommand;
+use App\Console\Commands\JobScrape\RemotiveScrapeCommand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 

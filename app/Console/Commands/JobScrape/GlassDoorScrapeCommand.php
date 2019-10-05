@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\JobScrape;
 
 use App\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;
@@ -17,7 +17,7 @@ class GlassDoorScrapeCommand extends AbstractJobScrape
 
     public function getJobs($url)
     {
-        $url .= '?' . http_build_query($this->config['params']);
+        $url .= '?' . http_build_query($this->config('params'));
 
         $crawler = $this->crawlerGet($url);
 

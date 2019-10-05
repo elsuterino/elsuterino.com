@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\ScrapeCommandTests;
 
-use App\Console\Commands\WeWorkRemotelyScrapeCommand;
+use App\Console\Commands\JobScrape\WeWorkRemotelyScrapeCommand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Arr;
 
 class WeWorkRemotelyTest extends AbstractScrape
 {
@@ -14,15 +13,6 @@ class WeWorkRemotelyTest extends AbstractScrape
     {
         $class = new WeWorkRemotelyScrapeCommand();
 
-        $urls = Arr::wrap($class->config['url']);
-
-        foreach($urls as $url) {
-            $this->assertIsString($url);
-
-            $jobs = $class->getJobs($url);
-            dd($jobs);
-        }
-
-//        $this->validate_array($class);
+        $this->validate_array($class);
     }
 }

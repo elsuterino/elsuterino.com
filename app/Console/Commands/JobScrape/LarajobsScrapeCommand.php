@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\JobScrape;
 
 use App\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;

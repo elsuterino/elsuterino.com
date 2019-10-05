@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\JobScrape;
 
-use App\Job;
 use App\Traits\CrawlerTrait;
-use App\Traits\JobCommandTrait;
-use Goutte\Client;
-use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Symfony\Component\DomCrawler\Crawler;
@@ -30,7 +26,12 @@ class WeWorkRemotelyScrapeCommand extends AbstractJobScrape
             });
 
         // needs some filtering due to last li element being navigation
-        return Arr::where($jobs, function($item){
+        return $this->trimJobsArray($jobs);
+    }
+
+    public function trimJobsArray($jobs)
+    {
+        return Arr::where($jobs, function ($item) {
             return $item['provider_id'] && $item['title'];
         });
     }

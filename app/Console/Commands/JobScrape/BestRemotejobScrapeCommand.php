@@ -1,10 +1,11 @@
 <?php
 
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\JobScrape;
 
 use App\Traits\GuzzleTrait;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 
 class BestRemotejobScrapeCommand extends AbstractJobScrape
 {

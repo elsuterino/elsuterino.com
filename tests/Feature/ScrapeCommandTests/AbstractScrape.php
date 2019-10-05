@@ -3,15 +3,14 @@
 
 namespace Tests\Feature\ScrapeCommandTests;
 
-
-use App\Interfaces\JobScrapeInterface;
+use App\Console\Commands\JobScrape\JobScrapeInterface;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class AbstractScrape extends TestCase
 {
     public function validate_array(JobScrapeInterface $class){
-        $urls = Arr::wrap($class->config['url']);
+        $urls = Arr::wrap($class->config('url'));
 
         foreach($urls as $url){
             $this->assertIsString($url);

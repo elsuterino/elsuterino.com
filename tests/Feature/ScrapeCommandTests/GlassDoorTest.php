@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\ScrapeCommandTests;
 
-use App\Console\Commands\GlassDoorScrapeCommand;
+use App\Console\Commands\JobScrape\GlassDoorScrapeCommand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;

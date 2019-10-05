@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\ScrapeCommandTests;
 
-use App\Console\Commands\BestRemotejobScrapeCommand;
+use App\Console\Commands\JobScrape\BestRemotejobScrapeCommand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 
