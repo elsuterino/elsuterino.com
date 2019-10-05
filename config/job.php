@@ -79,6 +79,13 @@ return [
                 'https://api.doask.net/search/query/jobs/?is_active=true&search=php&limit=1000',
                 'https://api.doask.net/search/query/jobs/?is_active=true&search=laravel&limit=1000',
             ]
+        ],
+        'remoteco' => [
+            'color' => null,
+            'name' => 'remote.co',
+            'displayUrl' => 'https://remote.co',
+            'iconUrl' => 'https://remote.co/wp-content/uploads/2015/07/remote_co_twitter.png',
+            'url' => 'https://remote.co/remote-jobs/developer'
         ]
     ],
 ];
