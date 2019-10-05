@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'discordHook' => env('DISCORD_WEBHOOK', null),
+    'discordHook' => env('MSG_DISCORD_WEBHOOK', null),
 ];
