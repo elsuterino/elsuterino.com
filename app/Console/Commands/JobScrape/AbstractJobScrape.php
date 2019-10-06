@@ -36,6 +36,8 @@ abstract class AbstractJobScrape extends Command implements JobScrapeInterface
         foreach ($urls as $url) {
             $jobs = $this->getJobs($url);
 
+            $this->info('Found ' . count($jobs) . ' jobs in ' . $this->config('url'));
+
             $this->saveJobs($jobs);
         }
     }

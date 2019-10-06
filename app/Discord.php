@@ -50,4 +50,14 @@ class Discord
             logger('discord call failed ' . $e->getMessage());
         }
     }
+
+    /**
+     * @param $webhook
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws GuzzleException
+     */
+    public function sendTest($webhook)
+    {
+        return $this->client->request('POST', $webhook, $this->payload);
+    }
 }
