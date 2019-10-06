@@ -61,7 +61,7 @@ abstract class AbstractJobScrape extends Command implements JobScrapeInterface
                 ],
                 [
                     'title' => $job['title'],
-                    'company' => $job['client'] ?? null,
+                    'company' => $job['company'] ?? null,
                     'location' => $job['location'] ?? null,
                     'url' => $job['url'],
                     'tags' => $job['tags'] ?? null,
