@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/404', function () {
-    abort(404);
-})->name('home');
+Route::get('/404', 'NotFoundController@handle')->name('notFound');
 
-Route::get('/{any?}', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/{any?}', 'FrontendController@handle')->name('home');

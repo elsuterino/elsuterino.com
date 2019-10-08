@@ -1,7 +1,4 @@
 const mix = require('laravel-mix');
-const path = require('path');
-const PrerenderSPAPlugin = require('prerender-spa-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 require('laravel-mix-svg-vue');
 /*
  |--------------------------------------------------------------------------
@@ -15,28 +12,6 @@ require('laravel-mix-svg-vue');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .webpackConfig({
-        // module: {
-        //     rules: [
-        //         {
-        //             test: /\.svg$/,
-        //             loader: 'vue-svg-loader',
-        //         },
-        //     ],
-        // },
-        // plugins: [
-        //     new HtmlWebpackPlugin({
-        //         template: Mix.Paths.root('resources/views/index.blade.php'),
-        //         inject: false
-        //     }),
-        //     new PrerenderSPAPlugin({
-        //         // Required - The path to the webpack-outputted app to prerender.
-        //         staticDir: Mix.output().path,
-        //         // Required - Routes to render.
-        //         routes: ['/', '/about', '/contact', '/portfolio', '/skills'],
-        //     })
-        // ]
-    });
+    .sass('resources/sass/app.scss', 'public/css');
 
 mix.version();
