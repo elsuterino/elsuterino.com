@@ -27,14 +27,6 @@ class BestRemotejobScrapeCommand extends AbstractJobScrape
         $data = $this->guzzleGetJson($url);
 
         foreach ($data->results as $job) {
-            if ($job->is_active === false) {
-                continue;
-            }
-
-            if (!$job->id) {
-                continue;
-            }
-
             $jobs[] = $this->formatJob($job);
         }
 

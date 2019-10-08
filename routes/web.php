@@ -15,6 +15,32 @@ Route::get('/404', function () {
     abort(404);
 })->name('home');
 
-Route::get('/{any?}', function () {
+Route::get('/', function () {
     return view('welcome');
-})->name('home');
+});
+
+Route::get('/about', function () {
+    return view('welcome');
+});
+
+Route::get('/cheatsheet', function () {
+    $cheatsheet = \App\CheatsheetEntry::with('tags')->get();
+    $cheatsheet = \App\Http\Resources\CheatsheetEntryResource::collection($cheatsheet);
+    return view('welcome', compact('cheatsheet'));
+});
+
+Route::get('/contact', function () {
+    return view('welcome');
+});
+
+Route::get('/experience', function () {
+    return view('welcome');
+});
+
+Route::get('/portfolio', function () {
+    return view('welcome');
+});
+
+Route::get('/skills', function () {
+    return view('welcome');
+});

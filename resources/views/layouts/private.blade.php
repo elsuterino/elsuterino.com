@@ -7,14 +7,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
 
-@include('seo-meta')
-<!-- Fonts -->
+    @include('seo-meta')
+    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
@@ -36,48 +34,35 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="{{ route('jobs') }}">
+                    <a class="navbar-item" href="{{ route('admin.jobs.index') }}">
                         Jobs
                     </a>
 
-                    <a class="navbar-item">
-                        Documentation
+                    <a class="navbar-item" href="{{ route('admin.cheatsheet.index') }}">
+                        Cheatsheet
                     </a>
-
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            More
-                        </a>
-
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                About
-                            </a>
-                            <a class="navbar-item">
-                                Jobs
-                            </a>
-                            <a class="navbar-item">
-                                Contact
-                            </a>
-                            <hr class="navbar-divider">
-                            <a class="navbar-item">
-                                Report an issue
-                            </a>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-primary">
-                                <strong>Sign up</strong>
-                            </a>
-                            <a class="button is-light">
-                                Log in
-                            </a>
+                    @if (Auth::guest())
+                        <a class="navbar-item " href="{{ route('login') }}">Login</a>
+                    @else
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>

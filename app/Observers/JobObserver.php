@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Discord;
 use App\Job;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 class JobObserver
@@ -16,6 +17,10 @@ class JobObserver
      */
     public function created(Job $job)
     {
+        if(App::environment('local')){
+            return;
+        }
+
         $config = config("job.providers.{$job->provider}");
 
         if (!$config || !config('job.discordWebhook')) {

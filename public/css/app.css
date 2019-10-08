@@ -12911,6 +12911,10 @@ label.panel-block:hover {
   justify-content: start;
 }
 
+.mr-05 {
+  margin-right: 0.5rem;
+}
+
 .pin {
   top: 0;
   bottom: 0;
@@ -12968,5 +12972,10 @@ label.panel-block:hover {
     margin-right: auto;
     opacity: 0.3;
   }
+}
+
+.content pre {
+  background-color: #2d3748;
+  color: white;
 }
 

@@ -5,6 +5,7 @@ import About from './views/About';
 import Skills from './views/Skills';
 import Contact from './views/Contact';
 import Experience from "./views/Experience";
+import Cheatsheet from "./views/Cheatsheet";
 
 export default new VueRouter({
     mode: 'history',
@@ -42,11 +43,11 @@ export default new VueRouter({
             component: Contact,
             name: 'contact'
         },
-        // {
-        //     path: '/cv',
-        //     component: Home,
-        //     name: 'cv'
-        // },
+        {
+            path: '/cheatsheet',
+            component: Cheatsheet,
+            name: 'cheatsheet'
+        },
         // {
         //     path: '',
         //     component: Home,

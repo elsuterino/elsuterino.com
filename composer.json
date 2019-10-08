@@ -7,18 +7,27 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories":[
+        {
+            "type": "vcs",
+            "url": "git@github.com:elsuterino/laravel-nova.git"
+        }
+    ],
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
         "fabpot/goutte": "^3.2",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel-frontend-presets/bulma": "^3.0",
         "laravel/framework": "^6.0",
+        "laravel/nova": "^2.1@dev",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.0",
+        "lynndigital/select-or-custom": "dev-master",
+        "spatie/nova-tags-field": "^2.3",
         "spatie/regex": "^1.4",
-        "symfony/process": "^4.3",
-        "ext-json": "*"
+        "symfony/process": "^4.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

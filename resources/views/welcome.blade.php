@@ -10,13 +10,17 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
-    @include('seo-meta')
-    <!-- Fonts -->
+@include('seo-meta')
+<!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    @if(isset($cheatsheet))
+    <script>window.cheatsheet = {!! json_encode($cheatsheet) !!}</script>
+    @endif
 </head>
 <body>
 <div id="app">
