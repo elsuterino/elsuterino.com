@@ -16,10 +16,8 @@ abstract class AbstractJobScrape extends Command implements JobScrapeInterface
 
     protected $provider;
 
-    public function __construct()
+    public function handle()
     {
-        parent::__construct();
-
         $this->provider = Provider::where('title', $this->key)->first();
 
         if (!$this->provider) {
@@ -27,10 +25,7 @@ abstract class AbstractJobScrape extends Command implements JobScrapeInterface
 
             exit();
         }
-    }
 
-    public function handle()
-    {
         foreach ($this->provider->query_urls as $url) {
             $jobs = $this->getJobs($url);
 
