@@ -10,10 +10,10 @@ class IndeedScrapeCommand extends AbstractJobScrape
 {
     use CrawlerTrait;
 
-    protected $signature = 'scrape:indeed';
+    protected $signature = 'scrape:indeed {--silent}';
     protected $description = 'Scrapes Indeed.com';
 
-    public $provider = 'indeed';
+    public $key = 'indeed';
 
     public function getJobs($url)
     {
@@ -29,7 +29,7 @@ class IndeedScrapeCommand extends AbstractJobScrape
 
             $lastPagination = $crawler->filter('#resultsCol .pagination > a')->last();
 
-            if ($text = trim($lastPagination->filter('.pn .np')->first()->text(null))) {
+            if ($text = $this->firstNodeText($lastPagination, '.pn .np')) {
                 if (strtolower($text) === 'next »') {
                     $jobs = array_merge(
                         $jobs,
@@ -46,12 +46,12 @@ class IndeedScrapeCommand extends AbstractJobScrape
     {
         return [
             'provider_id' => $node->attr('id'),
-            'title' => trim($node->filter('.title > a')->first()->text(null)),
-            'company' => trim($node->filter('.sjcl .company')->first()->text(null)),
-            'location' => trim($node->filter('.sjcl .location')->first()->text(null)),
-            'description' => trim($node->filter('.summary')->first()->text(null)),
+            'title' => $this->firstNodeText($node, '.title > a'),
+            'company' => $this->firstNodeText($node, '.sjcl .company'),
+            'location' => $this->firstNodeText($node, '.sjcl .location'),
+            'description' => $this->firstNodeText($node, '.summary'),
             'url' => $this->firstNodeLink($node, '.title > a'),
-            'salary' => trim($node->filter('.salaryText')->first()->text(null)),
+            'salary' => $this->firstNodeText($node, '.salaryText'),
         ];
     }
 }

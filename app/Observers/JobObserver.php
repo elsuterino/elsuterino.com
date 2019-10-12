@@ -16,20 +16,14 @@ class JobObserver
      */
     public function created(Job $job)
     {
-        $config = config("job.providers.{$job->provider}");
-
-        if (!$config || !config('job.discordWebhook')) {
-            return;
-        }
-
         $payload = [
             'title' => $job->title,
-            'color' => $config['color'],
+            'color' => hexdec($job->provider->color),
             'url' => $job->url,
             'author' => [
-                'name' => $config['name'],
-                'url' => $config['displayUrl'],
-                'icon_url' => $config['iconUrl'],
+                'name' => $job->provider->title,
+                'url' => $job->provider->url,
+                'icon_url' => $job->provider->media->first()->getFullUrl(),
             ],
             'description' => $job->description,
         ];

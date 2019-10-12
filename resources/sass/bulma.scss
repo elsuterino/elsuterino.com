@@ -1,20 +1,38 @@
-@charset "utf-8";
-/*! bulma.io v0.7.5 | MIT License | github.com/jgthms/bulma */
-
-@import "initial-variables";
-
-
-/* modified path import of other modules */
+// Import Bulma's core
 @import "~bulma/sass/utilities/_all";
-@import "~bulma/sass/base/_all";
-@import "~bulma/sass/elements/_all";
-@import "~bulma/sass/form/_all";
-@import "~bulma/sass/components/_all";
-@import "~bulma/sass/grid/_all";
-@import "~bulma/sass/layout/_all";
 
+// Set your colors
+$primary: #ff8606;
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
 
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "twitter": ($twitter, $twitter-invert)
+);
 
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
 
-/* import bulma extensions. https://wikiki.github.io/ */
-@import "bulma-extensions";
+// menu
+$menu-item-active-background-color:	darken($primary, 5%);
+$menu-item-hover-background-color: darken($primary, 3%);
+$menu-item-color: $white;
+$menu-label-color: $white-ter;
+$menu-item-hover-color: $white;
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

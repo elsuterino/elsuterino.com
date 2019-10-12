@@ -11,10 +11,10 @@ class RemoteCoScrapeCommand extends AbstractJobScrape
 {
     use CrawlerTrait;
 
-    protected $signature = 'scrape:remoteco';
+    protected $signature = 'scrape:remoteco {--silent}';
     protected $description = 'Scrapes remote.co';
 
-    public $provider = 'remoteco';
+    public $key = 'remoteco';
 
     public function getJobs($url)
     {
@@ -40,8 +40,8 @@ class RemoteCoScrapeCommand extends AbstractJobScrape
     {
         return [
             'provider_id' => $this->firstNodeLink($node, 'a'),
-            'title' => $node->filter('.position > h3')->first()->text(null),
-            'company' => $node->filter('.company > span')->first()->text(null),
+            'title' => $this->firstNodeText($node, '.position > h3'),
+            'company' => $this->firstNodeText($node, '.company > span'),
             'url' => $this->firstNodeLink($node, 'a'),
             'logo' => $this->firstNodeAttribute($node, 'img.company_logo', 'src'),
             'tags' => $node->filter('.company > span.job_flag')->extract(['_text'])

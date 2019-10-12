@@ -11,10 +11,10 @@ class RemotiveScrapeCommand extends AbstractJobScrape
 {
     use CrawlerTrait;
 
-    protected $signature = 'scrape:remotive';
+    protected $signature = 'scrape:remotive {--silent}';
     protected $description = 'Scrapes remotive.io';
 
-    public $provider = 'remotive';
+    public $key = 'remotive';
 
     public function getJobs($url)
     {
@@ -30,9 +30,9 @@ class RemotiveScrapeCommand extends AbstractJobScrape
     {
         return [
             'provider_id' => $this->getId($node),
-            'title' => trim($node->filter('.position a')->first()->text(null)),
-            'company' => trim($node->filter('.company span')->first()->text(null)),
-            'location' => trim($node->filter('.company > .location')->first()->text(null)),
+            'title' => $this->firstNodeText($node, '.position a'),
+            'company' => $this->firstNodeText($node, '.company span'),
+            'location' => $this->firstNodeText($node, '.company > .location'),
             'url' => $node->filter('.position > a')->first()->link()->getUri(),
             'logo' => $this->getLogo($node),
             'tags' => $node->filter('.job-tags > .job-tag')->extract(['_text']),

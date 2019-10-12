@@ -26,12 +26,17 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.25",
         "@fortawesome/free-brands-svg-icons": "^5.11.2",
         "@fortawesome/free-solid-svg-icons": "^5.11.2",
         "@fortawesome/vue-fontawesome": "^0.1.7",
+        "@inertiajs/inertia": "^0.1.6",
+        "@inertiajs/inertia-vue": "^0.1.2",
+        "buefy": "^0.8.5",
         "html-webpack-plugin": "^3.2.0",
         "laravel-mix-svg-vue": "^0.2.3",
+        "markdown-it": "^10.0.0",
         "prerender-spa-plugin": "^3.4.0",
         "svg-vue": "^0.1.1",
         "vue-meta": "^2.2.2",

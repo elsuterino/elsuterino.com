@@ -3,7 +3,7 @@ import Vue from "vue";
 // fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-import { faFilePdf, faDatabase, faStar, faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faDatabase, faStar, faEnvelope, faPhone, faGlobe, faArrowUp, faArrowDown, faTrash, faMinus, faPlus, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import {
     faPhp, faJs, faHtml5, faCss3Alt, faUbuntu, faVuejs, faSymfony, faWordpress, faLaravel, faDocker, faGithub,
@@ -68,7 +68,7 @@ export const faJquery = {
 library.add(
     faFilePdf, faDatabase, faPhp, faJs, faHtml5, faCss3Alt, faUbuntu, faVuejs, faSymfony, faWordpress,
     faLaravel, faDocker, faStar, faGithub, faLinkedin, faEnvelope, faPhone, faGlobe, faSkype, faMysql, faElasticSearch,
-    faInfluxDb, faRedis, faNginx, faJquery, faBootstrap
+    faInfluxDb, faRedis, faNginx, faJquery, faBootstrap, faArrowUp, faArrowDown, faTrash, faMinus, faPlus, faAngleLeft, faAngleRight
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

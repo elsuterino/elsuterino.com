@@ -1,10 +1,9 @@
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 // Variables
 @import "bulma";
 @import 'wave';
 @import 'animations';
 @import 'helpers';
+@import 'nprogress';
 
 @media screen and (max-width: 768px) {
     .level-item.contacts {

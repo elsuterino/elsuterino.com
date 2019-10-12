@@ -11,10 +11,10 @@ class WeWorkRemotelyScrapeCommand extends AbstractJobScrape
 {
     use CrawlerTrait;
 
-    protected $signature = 'scrape:weworkremotely';
+    protected $signature = 'scrape:weworkremotely {--silent}';
     protected $description = 'Scrapes WeWorkRemotely.com';
 
-    public $provider = 'weworkremotely';
+    public $key = 'weworkremotely';
 
     public function getJobs($url)
     {
@@ -40,10 +40,10 @@ class WeWorkRemotelyScrapeCommand extends AbstractJobScrape
     {
         return [
             'provider_id' => $this->url($node),
-            'title' => $node->filter('.title')->first()->text(null),
-            'company' => $node->filter('.company')->first()->text(null),
+            'title' => $this->firstNodeText($node, '.title'),
+            'company' => $this->firstNodeText($node, '.company'),
             'url' => $this->url($node),
-            'location' => $node->filter('.region.company')->first()->text(null),
+            'location' => $this->firstNodeText($node, '.region.company'),
             'logo' => $this->logo($node),
         ];
     }

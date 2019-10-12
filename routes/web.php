@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/404', 'NotFoundController@handle')->name('notFound');
+// Auth
+//Route::get('login', 'Auth\LoginController@showLoginForm')->middleware('guest');
+//Route::post('login', 'Auth\LoginController@login')->middleware('guest');
+//Route::post('logout', 'Auth\LoginController@logout')->middleware('auth');
 
-Route::get('/{any?}', 'FrontendController@handle')->name('home');
+Route::get('/', 'AboutController@index');
+Route::get('/about', 'AboutController@index');
+//Route::get('/experience', 'StaticPageController@experience');
+Route::get('/portfolio', 'PortfolioController@index');
+Route::get('/skills', 'SkillController@index');
+
+Route::get('/contact', 'ContactController@index');
+Route::post('/contact', 'ContactController@store');

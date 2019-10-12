@@ -89,3 +89,9 @@ $custom-colors: (
     background-color: $primary;
     z-index: 2;
 }
+
+$menu-item-active-background-color:	darken($primary, 5%);
+$menu-item-hover-background-color: darken($primary, 3%);
+$menu-item-color: $white;
+$menu-label-color: $white-ter;
+$menu-item-hover-color: $white;

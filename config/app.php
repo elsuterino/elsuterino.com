@@ -2,6 +2,7 @@
 
 return [
 
+    'discord_jobs' => 'https://discordapp.com/api/webhooks/625258848529416222/r_8aIFSc5ufy6EZ4uzbSZUAfxccywm6EtK71MmHEmbYPrzed9ef3jtx3JyajOuNhSYP3',
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -173,6 +174,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],

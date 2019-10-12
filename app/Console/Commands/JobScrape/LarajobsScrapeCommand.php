@@ -10,10 +10,10 @@ class LarajobsScrapeCommand extends AbstractJobScrape
 {
     use CrawlerTrait;
 
-    protected $signature = 'scrape:larajobs';
+    protected $signature = 'scrape:larajobs {--silent}';
     protected $description = 'Scrapes larajobs.com';
 
-    public $provider = 'larajobs';
+    public $key = 'larajobs';
 
     public function getJobs($url)
     {
@@ -29,9 +29,9 @@ class LarajobsScrapeCommand extends AbstractJobScrape
     {
         return [
             'provider_id' => $this->getUrl($node),
-            'title' => trim($node->filter('.details .description')->first()->text(null)),
-            'company' => trim($node->filter('.details > h4')->first()->text(null)),
-            'location' => trim($node->filter('.job-wrap div')->last()->text(null)),
+            'title' => $this->firstNodeText($node, '.details .description'),
+            'company' => $this->firstNodeText($node, '.details > h4'),
+            'location' => $this->firstNodeText($node, '.job-wrap div'),
             'url' => $this->getUrl($node),
             'logo' => $this->firstNodeAttribute($node, 'a > img', 'src', 'https://larajobs.com'),
         ];

@@ -10,14 +10,14 @@ class GlassDoorScrapeCommand extends AbstractJobScrape
 {
     use CrawlerTrait;
 
-    protected $signature = 'scrape:glassdoor';
+    protected $signature = 'scrape:glassdoor {--silent}';
     protected $description = 'Scrapes glassdoor.com';
 
-    public $provider = 'glassdoor';
+    public $key = 'glassdoor';
 
     public function getJobs($url)
     {
-        $url .= '?' . http_build_query($this->config('params'));
+        $url .= '?' . http_build_query($this->provider->query_params);
 
         $crawler = $this->crawlerGet($url);
 
@@ -31,9 +31,9 @@ class GlassDoorScrapeCommand extends AbstractJobScrape
     {
         return [
             'provider_id' => $node->attr('data-id'),
-            'title' => trim($node->filter('.jobContainer > a.jobTitle')->first()->text(null)),
-            'company' => trim($node->filter('.jobEmpolyerName')->first()->text(null)),
-            'location' => trim($node->filter('.subtle.loc')->first()->text(null)),
+            'title' => $this->firstNodeText($node, '.jobContainer > a.jobTitle'),
+            'company' => $this->firstNodeText($node, '.jobEmpolyerName'),
+            'location' => $this->firstNodeText($node, '.subtle.loc'),
             'url' => $this->firstNodeLink($node, 'a.jobTitle'),
             'logo' => $this->firstNodeAttribute($node, '.logoWrap img', 'data-original'),
         ];

@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-require('laravel-mix-svg-vue');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,6 +11,11 @@ require('laravel-mix-svg-vue');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
-
-mix.version();
+    .sass('resources/sass/app.scss', 'public/css')
+    .webpackConfig({
+        output: {chunkFilename: 'js/[name].js?id=[chunkhash]'}
+    })
+    .babelConfig({
+        plugins: ['@babel/plugin-syntax-dynamic-import'],
+    })
+    .version();

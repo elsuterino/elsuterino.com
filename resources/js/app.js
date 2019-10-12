@@ -1,25 +1,31 @@
-require('./bootstrap');
-
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import VueMeta from 'vue-meta';
-import router from './routes';
+// require('./bootstrap');
 require('./fontawesome');
 
-Vue.use(VueRouter);
+import Vue from 'vue';
+import VueMeta from 'vue-meta';
+import { InertiaApp } from '@inertiajs/inertia-vue';
+import Buefy from 'buefy'
+
+Vue.use(Buefy, {
+    defaultIconComponent: 'font-awesome-icon',
+    defaultIconPack: 'fas',
+});
+
+Vue.use(InertiaApp);
+
 Vue.use(VueMeta, {
-    // optional pluginOptions
     refreshOnceOnNavigation: true
 });
 
-Vue.component('v-navbar', require('./layout/Navbar').default);
-Vue.component('v-contact-form', require('./components/ContactForm').default);
-Vue.component('v-wave', require('./components/Wave').default);
-Vue.component('v-piggie', require('./components/Piggie').default);
+const app = document.getElementById('app');
 
-const app = new Vue({
-    router,
-    el: '#app'
-});
+new Vue({
+    render: h => h(InertiaApp, {
+        props: {
+            initialPage: JSON.parse(app.dataset.page),
+            resolveComponent: name => import(`./Pages/${name}`).then(module => module.default)
+        },
+    }),
+}).$mount(app);
 
 // require('./bulma-extensions');

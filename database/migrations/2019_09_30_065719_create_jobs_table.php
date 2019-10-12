@@ -15,10 +15,7 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->string('provider');
-            $table->string('provider_id');
-
+            $table->unsignedBigInteger('provider_id');
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('company')->nullable();
@@ -30,7 +27,7 @@ class CreateJobsTable extends Migration
             $table->json('tags')->nullable();
             $table->timestamps();
 
-            $table->unique(['provider', 'provider_id']);
+            $table->unique(['url', 'provider_id']);
         });
     }
 

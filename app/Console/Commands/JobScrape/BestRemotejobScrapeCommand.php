@@ -11,11 +11,11 @@ class BestRemotejobScrapeCommand extends AbstractJobScrape
 {
     use GuzzleTrait;
 
-    protected $signature = 'scrape:bestremotejob';
+    protected $signature = 'scrape:bestremotejob {--silent}';
 
     protected $description = 'Scrapes bestremotejob.com';
     // the key for config and database
-    public $provider = 'bestremotejob';
+    public $key = 'bestremotejob';
 
     public function getJobs($url)
     {
