@@ -60,7 +60,7 @@ class SkillGroup extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Title'),
-            Sortable::make('Order', 'id')->onlyOnIndex(),
+            Sortable::make('Order')->onlyOnIndex(),
         ];
     }
 

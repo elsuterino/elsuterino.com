@@ -12,8 +12,12 @@ class SkillController extends Controller
 {
     public function index()
     {
-        $skills = SkillGroup::with('skills')
-            ->orderByDesc('order')
+        $skills = SkillGroup::with([
+            'skills' => function ($query) {
+                return $query->ordered();
+            },
+        ])
+            ->ordered()
             ->get(['id', 'title', 'order']);
 
         return Inertia::render('Skills', ['skills' => $skills]);

@@ -60,7 +60,7 @@ class Skill extends Resource
             BelongsTo::make('Group', 'group', 'App\Nova\SkillGroup'),
             Text::make('Title'),
             Rating::make('Stars')->min(0)->max(5)->increment(1),
-            Sortable::make('Order', 'id')->onlyOnIndex(),
+            Sortable::make('Order')->onlyOnIndex(),
         ];
     }
 

@@ -13,21 +13,26 @@ use App\Console\Commands\JobScrape\{
     LarajobsScrapeCommand,
     RemoteCoScrapeCommand,
     RemotiveScrapeCommand,
-    WeWorkRemotelyScrapeCommand
+    WeWorkRemotelyScrapeCommand,
+    RedditScrapeCommand
 };
 
 class ScrapeJobTest extends TestCase
 {
-    public function validate_array(JobScrapeInterface $class){
-        foreach($class->provider()->query_urls as $url){
+    public function validate_array(JobScrapeInterface $class, $canHaveZero = true)
+    {
+        foreach ($class->provider()->query_urls as $url) {
             $this->assertIsString($url);
 
             $jobs = $class->getJobs($url);
 
             $this->assertIsArray($jobs);
-            $this->assertNotCount(0, $jobs);
 
-            foreach($jobs as $job){
+            if($canHaveZero === true){
+                $this->assertNotCount(0, $jobs);
+            }
+
+            foreach ($jobs as $job) {
                 $this->assertTrue(!empty($job['provider_id']));
                 $this->assertTrue(!empty($job['url']));
             }
@@ -96,5 +101,13 @@ class ScrapeJobTest extends TestCase
         $wwrJobs = new WeWorkRemotelyScrapeCommand();
 
         $this->validate_array($wwrJobs);
+    }
+
+    /** @test * */
+    public function reddit_has_jobs()
+    {
+        $redditJobs = new RedditScrapeCommand();
+
+        $this->validate_array($redditJobs, false);
     }
 }
