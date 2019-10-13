@@ -33,7 +33,7 @@
         "laravel/nova": "^2.1@dev",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.0",
-        "naxon/nova-field-sortable": "^1.0",
+        "michielkempen/nova-order-field": "^2.0",
         "nikaia/nova-rating-field": "^1.0",
         "spatie/eloquent-sortable": "^3.7",
         "spatie/laravel-medialibrary": "^7.0.0",

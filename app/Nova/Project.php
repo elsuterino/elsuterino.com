@@ -9,14 +9,14 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Naxon\NovaFieldSortable\Concerns\SortsIndexEntries;
-use Naxon\NovaFieldSortable\Sortable;
+use MichielKempen\NovaOrderField\Orderable;
+use MichielKempen\NovaOrderField\OrderField;
 
 class Project extends Resource
 {
-    use SortsIndexEntries;
+    use Orderable;
 
-    public static $defaultSortField = 'order';
+    public static $defaultOrderField = 'order';
 
     /**
      * The logical group associated with the resource.
@@ -65,7 +65,7 @@ class Project extends Resource
             Images::make('Main image', 'main') // second parameter is the media collection name
                 ->conversionOnIndexView('conversion') // conversion used to display the image
                 ->rules('required'),
-            Sortable::make('Order')->onlyOnIndex(),
+            OrderField::make('Order')->onlyOnIndex(),
         ];
     }
 

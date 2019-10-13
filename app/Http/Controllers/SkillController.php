@@ -12,11 +12,7 @@ class SkillController extends Controller
 {
     public function index()
     {
-        $skills = SkillGroup::with([
-            'skills' => function ($query) {
-                return $query->ordered();
-            },
-        ])
+        $skills = SkillGroup::with(['skills'])
             ->ordered()
             ->get(['id', 'title', 'order']);
 

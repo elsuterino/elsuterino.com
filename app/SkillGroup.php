@@ -19,6 +19,6 @@ class SkillGroup extends Model implements Sortable
 
     public function skills()
     {
-        return $this->hasMany(Skill::class);
+        return $this->hasMany(Skill::class)->orderByDesc('stars')->ordered();
     }
 }

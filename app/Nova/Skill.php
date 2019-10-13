@@ -7,15 +7,14 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Naxon\NovaFieldSortable\Concerns\SortsIndexEntries;
-use Naxon\NovaFieldSortable\Sortable;
+use MichielKempen\NovaOrderField\Orderable;
+use MichielKempen\NovaOrderField\OrderField;
 
 class Skill extends Resource
 {
-    use SortsIndexEntries;
+    use Orderable;
 
-    public static $defaultSortField = 'order';
+    public static $defaultOrderField = 'order';
 
     /**
      * The logical group associated with the resource.
@@ -60,7 +59,7 @@ class Skill extends Resource
             BelongsTo::make('Group', 'group', 'App\Nova\SkillGroup'),
             Text::make('Title'),
             Rating::make('Stars')->min(0)->max(5)->increment(1),
-            Sortable::make('Order')->onlyOnIndex(),
+            OrderField::make('Order')->onlyOnIndex(),
         ];
     }
 

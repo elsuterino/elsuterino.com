@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Naxon\NovaFieldSortable\Concerns\SortsIndexEntries;
-use Naxon\NovaFieldSortable\Sortable;
+use MichielKempen\NovaOrderField\Orderable;
+use MichielKempen\NovaOrderField\OrderField;
 
 class SkillGroup extends Resource
 {
-    use SortsIndexEntries;
+    use Orderable;
 
-    public static $defaultSortField = 'order';
+    public static $defaultOrderField = 'order';
 
     /**
      * The logical group associated with the resource.
@@ -60,7 +60,7 @@ class SkillGroup extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Title'),
-            Sortable::make('Order')->onlyOnIndex(),
+            OrderField::make('Order')->onlyOnIndex(),
         ];
     }
 
