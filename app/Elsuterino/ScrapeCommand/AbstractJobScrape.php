@@ -3,11 +3,8 @@
 
 namespace Elsuterino\ScrapeCommand;
 
-
-use App\Job;
 use App\Provider;
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 abstract class AbstractJobScrape extends Command implements JobScrapeInterface

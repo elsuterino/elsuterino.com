@@ -1,11 +1,18 @@
 <?php
 
-namespace App\Elsuterino;
+namespace Elsuterino\Nova\Fields;
 
 use Illuminate\Support\Arr;
-use Nikaia\Rating\Rating;
+use Nikaia\Rating\Rating as NikaiasRating;
 
-class ElRating extends Rating
+/**
+ * Class Rating
+ *
+ * Extending to fix old function usage
+ *
+ * @package Elsuterino\Nova\Fields
+ */
+class Rating extends NikaiasRating
 {
     /**
      * Style the component.
@@ -16,9 +23,11 @@ class ElRating extends Rating
     public function withStyles(array $styles)
     {
         $build = [];
+
         foreach (static::$defaultStyles as $key => $defaultValue) {
             $build[$key] = Arr::get($styles, $key, $defaultValue);
         }
+
         return $this->withMeta($build);
     }
 }

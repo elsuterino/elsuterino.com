@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Elsuterino\ElRating;
+use Elsuterino\Nova\Fields\Rating;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
@@ -59,7 +59,7 @@ class Skill extends Resource
             ID::make()->sortable(),
             BelongsTo::make('Group', 'group', 'App\Nova\SkillGroup'),
             Text::make('Title'),
-            ElRating::make('Stars')->min(0)->max(5)->increment(1),
+            Rating::make('Stars')->min(0)->max(5)->increment(1),
             Sortable::make('Order', 'id')->onlyOnIndex(),
         ];
     }
