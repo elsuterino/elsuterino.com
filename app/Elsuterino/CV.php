@@ -20,8 +20,8 @@ class CV
     public function __construct($role = 'Full Stack Web Developer')
     {
         $data = [
-            'skillGroups' => SkillGroup::with('skills')->orderByDesc('order')->get(),
-            'projects' => Project::get(),
+            'skillGroups' => SkillGroup::with('skills')->ordered()->get(),
+            'projects' => Project::ordered()->get(),
             'role' => $role,
         ];
 
