@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Traits;
+namespace Elsuterino\Traits;
 
 
 use Goutte\Client;
@@ -11,7 +11,7 @@ trait CrawlerTrait
 {
     /**
      * @param $url
-     * @return \Symfony\Component\DomCrawler\Crawler
+     * @return Crawler
      */
     public function crawlerGet(string $url)
     {

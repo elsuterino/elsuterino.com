@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Discord;
+use Elsuterino\Discord;
 use App\Job;
 use Illuminate\Support\Str;
 

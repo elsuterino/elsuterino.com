@@ -3,7 +3,8 @@
 
 namespace App\Console\Commands\JobScrape;
 
-use App\Traits\CrawlerTrait;
+use Elsuterino\ScrapeCommand\AbstractJobScrape;
+use Elsuterino\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;
 
 class LarajobsScrapeCommand extends AbstractJobScrape
@@ -13,7 +14,19 @@ class LarajobsScrapeCommand extends AbstractJobScrape
     protected $signature = 'scrape:larajobs {--silent}';
     protected $description = 'Scrapes larajobs.com';
 
-    public $key = 'larajobs';
+    /**
+     * Title most important, others take priority from database
+     *
+     * @var array
+     */
+    public $settings = [
+        'title' => 'larajobs',
+        'url' => 'https://larajobs.com',
+        'color' => '#35485e',
+        'query_urls' => [
+            'https://larajobs.com?remote=1',
+        ]
+    ];
 
     public function getJobs($url)
     {

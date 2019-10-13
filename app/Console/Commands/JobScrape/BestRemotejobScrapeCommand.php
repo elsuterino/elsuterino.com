@@ -3,9 +3,9 @@
 
 namespace App\Console\Commands\JobScrape;
 
-use App\Traits\GuzzleTrait;
+use Elsuterino\ScrapeCommand\AbstractJobScrape;
+use Elsuterino\Traits\GuzzleTrait;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 
 class BestRemotejobScrapeCommand extends AbstractJobScrape
 {
@@ -14,8 +14,21 @@ class BestRemotejobScrapeCommand extends AbstractJobScrape
     protected $signature = 'scrape:bestremotejob {--silent}';
 
     protected $description = 'Scrapes bestremotejob.com';
-    // the key for config and database
-    public $key = 'bestremotejob';
+
+    /**
+     * Title most important, others take priority from database
+     *
+     * @var array
+     */
+    protected $settings = [
+        'title' => 'bestremotejob',
+        'url' => 'https://bestremotejob.com',
+        'color' => '#3D90E3',
+        'query_urls' => [
+            'https://api.doask.net/search/query/jobs/?is_active=true&search=php&limit=1000',
+            'https://api.doask.net/search/query/jobs/?is_active=true&search=laravel&limit=1000',
+        ]
+    ];
 
     public function getJobs($url)
     {

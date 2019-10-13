@@ -4,13 +4,12 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Inspheric\Fields\Url;
-use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Job extends Resource
 {
@@ -62,6 +61,7 @@ class Job extends Resource
             Url::make('Url')->domainLabel()->clickableOnIndex(),
             Text::make('Location'),
             Code::make('Tags'),
+            DateTime::make('Created At')->onlyOnIndex()->format('YYYY MM DD HH:mm:ss')
         ];
     }
 

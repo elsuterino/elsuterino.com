@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Console\Commands\JobScrape;
+namespace Elsuterino\ScrapeCommand;
 
 
 use App\Job;
@@ -12,20 +12,34 @@ use Illuminate\Support\Facades\DB;
 
 abstract class AbstractJobScrape extends Command implements JobScrapeInterface
 {
-    public $key;
-
+    /**
+     * @var Provider|\Illuminate\Database\Eloquent\Model|object|null
+     */
     protected $provider;
 
-    public function handle()
+    /**
+     * @var array
+     */
+    protected $settings;
+
+    /**
+     * AbstractJobScrape constructor.
+     */
+    public function __construct()
     {
-        $this->provider = Provider::where('title', $this->key)->first();
+        parent::__construct();
+
+        $this->provider = $this->provider();
 
         if (!$this->provider) {
             logger()->critical(get_class($this) . ' Provider not set');
 
             exit();
         }
+    }
 
+    public function handle()
+    {
         foreach ($this->provider->query_urls as $url) {
             $jobs = $this->getJobs($url);
 
@@ -35,9 +49,28 @@ abstract class AbstractJobScrape extends Command implements JobScrapeInterface
         }
     }
 
-    public function sainitiseTags(array $jobs){
-        foreach($jobs as $index => $job){
-            if(isset($job['tags']) && is_array($job['tags'])){
+    /**
+     * @return Provider|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function provider()
+    {
+        $provider = Provider::where('title', $this->settings['title'])->first();
+
+        if (!$provider) {
+            $provider = Provider::create($this->settings);
+        }
+
+        return $provider;
+    }
+
+    /**
+     * @param  array  $jobs
+     * @return array
+     */
+    public function sainitiseTags(array $jobs)
+    {
+        foreach ($jobs as $index => $job) {
+            if (isset($job['tags']) && is_array($job['tags'])) {
                 $jobs[$index]['tags'] = json_encode($job['tags']);
             }
         }
@@ -45,6 +78,10 @@ abstract class AbstractJobScrape extends Command implements JobScrapeInterface
         return $jobs;
     }
 
+    /**
+     * @param  array  $jobs
+     * @param  null  $silent
+     */
     public function saveJobs(array $jobs, $silent = null)
     {
         if ($silent) {
@@ -69,6 +106,5 @@ abstract class AbstractJobScrape extends Command implements JobScrapeInterface
                     );
             }
         }
-
     }
 }

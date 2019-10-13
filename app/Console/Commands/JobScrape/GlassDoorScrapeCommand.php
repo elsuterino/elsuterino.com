@@ -3,7 +3,8 @@
 
 namespace App\Console\Commands\JobScrape;
 
-use App\Traits\CrawlerTrait;
+use Elsuterino\ScrapeCommand\AbstractJobScrape;
+use Elsuterino\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;
 
 class GlassDoorScrapeCommand extends AbstractJobScrape
@@ -13,7 +14,39 @@ class GlassDoorScrapeCommand extends AbstractJobScrape
     protected $signature = 'scrape:glassdoor {--silent}';
     protected $description = 'Scrapes glassdoor.com';
 
-    public $key = 'glassdoor';
+    /**
+     * Title most important, others take priority from database
+     *
+     * @var array
+     */
+    public $settings = [
+        'title' => 'glassdoor',
+        'url' => 'https://glassdoor.com',
+        'color' => '#01b552',
+        'query_urls' => [
+            'https://www.glassdoor.com/Job/jobs.htm',
+        ],
+        'query_params' => [
+            'applicationType' => "0",
+            'cityId' => "-1",
+            'companyId' => "-1",
+            'employerSizes' => "0",
+            'fromAge' => "3",
+            'includeNoSalaryJobs' => "true",
+            'industryId' => "-1",
+            'jobType' => "all",
+            'locId' => "11047",
+            'locKeyword' => "Remote",
+            'locT' => "S",
+            'minRating' => "0",
+            'minSalary' => "50000",
+            'radius' => "25",
+            'remoteWorkType' => "0",
+            'sc.keyword' => "php",
+            'seniorityType' => "all",
+            'sgocId' => "-1",
+        ],
+    ];
 
     public function getJobs($url)
     {

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Discord;
+use Elsuterino\Discord;
 use Tests\TestCase;
 
 class DiscordTest extends TestCase

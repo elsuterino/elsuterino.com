@@ -1,5 +1,5 @@
 // Variables
-@import "bulma";
+@import "bulma/bulma";
 @import 'wave';
 @import 'animations';
 @import 'helpers';
@@ -29,10 +29,6 @@
     }
 }
 
-
-//.hero {
-//    background: url(/images/hero.jpg);
-//}
 .piggie{
     position:absolute;
     bottom:0;

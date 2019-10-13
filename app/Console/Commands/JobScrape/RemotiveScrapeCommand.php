@@ -3,7 +3,8 @@
 
 namespace App\Console\Commands\JobScrape;
 
-use App\Traits\CrawlerTrait;
+use Elsuterino\ScrapeCommand\AbstractJobScrape;
+use Elsuterino\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;
 use Spatie\Regex\Regex;
 
@@ -12,9 +13,23 @@ class RemotiveScrapeCommand extends AbstractJobScrape
     use CrawlerTrait;
 
     protected $signature = 'scrape:remotive {--silent}';
+
     protected $description = 'Scrapes remotive.io';
 
-    public $key = 'remotive';
+    /**
+     * Title most important, others take priority from database
+     *
+     * @var array
+     */
+    public $settings = [
+        'title' => 'remotive',
+        'url' => 'https://remotive.io',
+        'color' => '#0096e3',
+        'query_urls' => [
+            'https://remotive.io/remote-jobs/software-dev?search=php',
+            'https://remotive.io/remote-jobs/software-dev?search=laravel',
+        ]
+    ];
 
     public function getJobs($url)
     {

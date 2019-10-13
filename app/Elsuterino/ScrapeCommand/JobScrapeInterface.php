@@ -1,10 +1,9 @@
 <?php
 
-
-namespace App\Console\Commands\JobScrape;
-
+namespace Elsuterino\ScrapeCommand;
 
 interface JobScrapeInterface
 {
     public function getJobs($config);
+    public function provider();
 }

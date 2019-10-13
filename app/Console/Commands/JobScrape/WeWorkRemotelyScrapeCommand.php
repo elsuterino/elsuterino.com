@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands\JobScrape;
 
-use App\Traits\CrawlerTrait;
+use Elsuterino\ScrapeCommand\AbstractJobScrape;
+use Elsuterino\Traits\CrawlerTrait;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Symfony\Component\DomCrawler\Crawler;
@@ -14,7 +15,19 @@ class WeWorkRemotelyScrapeCommand extends AbstractJobScrape
     protected $signature = 'scrape:weworkremotely {--silent}';
     protected $description = 'Scrapes WeWorkRemotely.com';
 
-    public $key = 'weworkremotely';
+    /**
+     * Title most important, others take priority from database
+     *
+     * @var array
+     */
+    public $settings = [
+        'title' => 'weworkremotely',
+        'url' => 'https://weworkremotely.com',
+        'color' => '#DDDDDD',
+        'query_urls' => [
+            'https://weworkremotely.com/categories/remote-programming-jobs',
+        ]
+    ];
 
     public function getJobs($url)
     {

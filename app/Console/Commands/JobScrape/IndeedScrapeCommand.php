@@ -3,7 +3,8 @@
 
 namespace App\Console\Commands\JobScrape;
 
-use App\Traits\CrawlerTrait;
+use Elsuterino\ScrapeCommand\AbstractJobScrape;
+use Elsuterino\Traits\CrawlerTrait;
 use Symfony\Component\DomCrawler\Crawler;
 
 class IndeedScrapeCommand extends AbstractJobScrape
@@ -11,9 +12,22 @@ class IndeedScrapeCommand extends AbstractJobScrape
     use CrawlerTrait;
 
     protected $signature = 'scrape:indeed {--silent}';
+
     protected $description = 'Scrapes Indeed.com';
 
-    public $key = 'indeed';
+    /**
+     * Title most important, others take priority from database
+     *
+     * @var array
+     */
+    public $settings = [
+        'title' => 'indeed',
+        'url' => 'https://indeed.com',
+        'color' => '#FFFFFF',
+        'query_urls' => [
+            'https://www.indeed.com/q-php-$40,000-l-Remote-jobs.html',
+        ]
+    ];
 
     public function getJobs($url)
     {

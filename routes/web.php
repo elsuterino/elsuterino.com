@@ -24,3 +24,5 @@ Route::get('/skills', 'SkillController@index');
 
 Route::get('/contact', 'ContactController@index');
 Route::post('/contact', 'ContactController@store');
+
+Route::get('/cv', 'CvController@index');

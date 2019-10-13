@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands\JobScrape;
 
-use App\Traits\CrawlerTrait;
+use Elsuterino\ScrapeCommand\AbstractJobScrape;
+use Elsuterino\Traits\CrawlerTrait;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Symfony\Component\DomCrawler\Crawler;
 
 class RemoteCoScrapeCommand extends AbstractJobScrape
@@ -14,7 +14,19 @@ class RemoteCoScrapeCommand extends AbstractJobScrape
     protected $signature = 'scrape:remoteco {--silent}';
     protected $description = 'Scrapes remote.co';
 
-    public $key = 'remoteco';
+    /**
+     * Title most important, others take priority from database
+     *
+     * @var array
+     */
+    public $settings = [
+        'title' => 'remoteco',
+        'url' => 'https://remote.co',
+        'color' => '#363839',
+        'query_urls' => [
+            'https://remote.co/remote-jobs/developer',
+        ]
+    ];
 
     public function getJobs($url)
     {
